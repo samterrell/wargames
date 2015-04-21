@@ -53,4 +53,10 @@ function($scope, $routeParams, $location) {
       console.log(error);
     });
   };
+
+  $scope.restart = function() {
+    channel.push("restart").receive("error", function(errors) {
+      console.log(errors);
+    });
+  };
 });

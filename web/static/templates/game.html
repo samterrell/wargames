@@ -1,13 +1,13 @@
 <div ng-if="state">
   <div ng-switch on="state.winner">
     <h1 ng-switch-when="draw">
-      Draw game. :(
+      Draw game. <button ng-click="restart()" class="btn btn-default">Play again?</button>
     </h1>
     <h1 ng-switch-when="x">
-      {{state.x}} wins!
+      {{state.x}} wins! <button ng-click="restart()" class="btn btn-default">Play again?</button>
     </h1>
     <h1 ng-switch-when="o">
-      {{state.o}} wins!
+      {{state.o}} wins! <button ng-click="restart()" class="btn btn-default">Play again?</button>
     </h1>
     <div ng-switch-default ng-class="'turn-'+state.turn">
       <p>

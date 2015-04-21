@@ -33,6 +33,16 @@ defmodule Wargames.TicTacToeChannel do
     {:reply, TicTacToe.Server.ping(socket.assigns.server), socket}
   end
 
+  def handle_in("restart", _, socket) do
+    case TicTacToe.Server.restart(socket.assigns.server) do
+      {:ok, state} ->
+        broadcast!(socket, "state", jsonify(state))
+        {:noreply, socket}
+      {:error, errors} ->
+        {:reply, {:error, errors}, socket}
+    end
+  end
+
   defp after_join(fun) do
     send(self, {:after_join, fun})
   end
