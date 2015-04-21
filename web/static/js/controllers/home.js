@@ -1,4 +1,5 @@
 angular.module('app').controller('HomeCtrl',
+['$scope', '$rootScope', '$location', '$cookies', '$routeParams',
 function($scope, $rootScope, $location, $cookies, $routeParams) {
   $scope.save_name = function(name) {
     if(name && name.trim().length > 0) {
@@ -12,4 +13,4 @@ function($scope, $rootScope, $location, $cookies, $routeParams) {
       $scope.errors = {name: true};
     }
   };
-});
+}]);
