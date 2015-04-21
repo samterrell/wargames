@@ -29,6 +29,11 @@ function($scope, $routeParams, $location) {
       $scope.$digest();
       console.log(state);
     });
+    channel.on("user:joined", function(evt) {
+      if(evt.position == 'o') $scope.state.o = evt.user;
+      $scope.$digest();
+      console.log(evt);
+    });
   });
 
   $scope.play = function(x, y) {
