@@ -17,7 +17,7 @@ defmodule Wargames.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Wargames, []},
-     applications: [:phoenix, :cowboy, :logger, :ecto]]
+     applications: [:phoenix, :cowboy, :logger]]
   end
 
   # Specifies which paths to compile per environment
@@ -29,8 +29,6 @@ defmodule Wargames.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, "~> 0.11"},
-     {:phoenix_ecto, "~> 0.3"},
-     {:postgrex, ">= 0.0.0"},
      {:phoenix_live_reload, "~> 0.3"},
      {:cowboy, "~> 1.0"}]
   end

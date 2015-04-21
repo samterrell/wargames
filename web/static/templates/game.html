@@ -1,0 +1,30 @@
+<div ng-if="state">
+  <div ng-switch on="state.winner">
+    <h1 ng-switch-when="draw">
+      Draw game. :(
+    </h1>
+    <h1 ng-switch-when="x">
+      {{state.x}} wins!
+    </h1>
+    <h1 ng-switch-when="o">
+      {{state.o}} wins!
+    </h1>
+    <div ng-switch-default ng-class="'turn-'+state.turn">
+      <p>
+        Share your game: <a href="#{{$location.url()}}" ng-click="evt.preventDefault()">Game Link</a>
+      </p>
+      <p class="player player-x">
+        {{state.x}}: X
+      </p>
+      <p class="player player-o">
+        {{state.o || "Waiting..."}}: O
+      </p>
+    </div>
+  </div>
+  <div class="jumbotron board">
+    <div class="row" ng-repeat="row in state.board track by $index">
+      <div class="cell col-xs-4" ng-repeat="cell in row track by $index"
+           ng-bind="cell || '&nbsp;'" ng-click="play($parent.$index, $index)"></div>
+    </div>
+  </div>
+</div>

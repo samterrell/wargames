@@ -1,0 +1,14 @@
+<div class="jumbotron form-group">
+  <h1>Name your game!</h1>
+  <form ng-submit="$location.path('/games/'+game_id)">
+    <p class="form-group {{errors.name ? 'has-error' : ''}}">
+      <span class="input-group input-group-lg col-xs-12">
+        <input ng-model="game_id" class="form-control" placeholder="A nice name">
+      </span>
+    </p>
+    <button type="submit" class="btn btn-primary btn-lg" >
+      Play
+      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+    </button>
+  </form>
+</div>

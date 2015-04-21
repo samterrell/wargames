@@ -2,7 +2,13 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: 'js/app.js'
+      joinTo: 'js/app.js',
+      order: {
+        before: [
+          'web/static/vendor/angular.js',
+          'web/static/vendor/jquery-2.1.3.js'
+        ]
+      }
       // To change the order of concatenation of files, explictly mention here
       // https://github.com/brunch/brunch/tree/stable/docs#concatenation
       // order: {
@@ -20,6 +26,10 @@ exports.config = {
     }
   },
 
+  modules: {
+    wrapper: false
+  },
+
   // Phoenix paths configuration
   paths: {
     // Which directories to watch
@@ -34,6 +44,9 @@ exports.config = {
     ES6to5: {
       // Do not use ES6 compiler in vendor code
       ignore: [/^(web\/static\/vendor)/]
+    },
+    angular_templates: {
+      module: 'app'
     }
   }
 };
