@@ -26,6 +26,8 @@ defmodule TicTacToe.Server do
 
   def state(pid), do: GenServer.call(pid, :state)
 
+  def restart(pid), do: GenServer.call(pid, :restart)
+
   def join(pid, player) when player != nil, do: GenServer.call(pid, {:join, player})
 
   # Server
@@ -68,6 +70,15 @@ defmodule TicTacToe.Server do
       {:reply, {:ok, state}, state, @timeout}
     else
       {:reply, {:error, errors}, state, @timeout}
+    end
+  end
+
+  def handle_call(:restart, _, state) do
+    if state.winner do
+      state = %TicTacToe.Server{x: state.o, o: state.x}
+      {:reply, {:ok, state}, state, @timeout}
+    else
+      {:reply, {:error, [:game_in_progress]}, state, @timeout}
     end
   end
 
