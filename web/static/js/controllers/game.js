@@ -1,8 +1,7 @@
-// jshint esnext:true
-import { Socket } from 'phoenix';
-
 angular.module('app').controller('GameCtrl',
+['$scope', '$routeParams', '$location',
 function($scope, $routeParams, $location) {
+  var Socket = require('phoenix').Socket;
   var game_id = $scope.game_id = $routeParams.game_id;
   if(!$scope.name) $location.url('/?game_id='+encodeURIComponent(game_id));
 
@@ -59,4 +58,4 @@ function($scope, $routeParams, $location) {
       console.log(errors);
     });
   };
-});
+}]);

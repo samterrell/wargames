@@ -1,6 +1,7 @@
 (function(){
   angular.module('app',['ngRoute', 'ngAnimate', 'ngCookies']).
-  config(function($routeProvider) {
+  config(['$routeProvider',
+  function($routeProvider) {
     $routeProvider.
     when('/', {
       templateUrl: 'web/static/templates/home.html',
@@ -13,9 +14,10 @@
       templateUrl: 'web/static/templates/game.html',
       controller: 'GameCtrl'
     });
-  }).
-  run(function($location, $rootScope, $cookies) {
+  }]).
+  run(['$location', '$rootScope', '$cookies',
+  function($location, $rootScope, $cookies) {
     $rootScope.$location = $location;
     $rootScope.name = $cookies.get("name");
-  });
+  }]);
 })();
