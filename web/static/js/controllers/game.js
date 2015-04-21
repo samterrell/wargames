@@ -2,8 +2,9 @@
 import { Socket } from 'phoenix';
 
 angular.module('app').controller('GameCtrl',
-function($scope, $routeParams){
+function($scope, $routeParams, $location) {
   var game_id = $scope.game_id = $routeParams.game_id;
+  if(!$scope.name) $location.url('/?game_id='+encodeURIComponent(game_id));
 
   var socket = new Socket("/ws");
   var channel;
