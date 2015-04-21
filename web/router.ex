@@ -1,6 +1,10 @@
 defmodule Wargames.Router do
   use Phoenix.Router
 
+  socket "/ws", Wargames do
+    channel "tictactoe:*", TicTacToeChannel
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session

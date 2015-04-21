@@ -5,10 +5,3 @@ use Mix.Config
 # your version control system.
 config :wargames, Wargames.Endpoint,
   secret_key_base: "W970aLlfKFPsiDrgjiRmFj8OyhH1ocls/1N8o2LbNb4BPp1hn9t1KVPZUCaLKstF"
-
-# Configure your database
-config :wargames, Wargames.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "wargames_prod"

@@ -1,0 +1,14 @@
+<div class="jumbotron form-group">
+  <h1>Who are you?</h1>
+  <form ng-submit="save_name(name)">
+    <p class="form-group {{errors.name ? 'has-error' : ''}}">
+      <span class="input-group input-group-lg col-xs-12">
+        <input ng-model="name" class="form-control" placeholder="A nice name">
+      </span>
+    </p>
+    <button type="submit" class="btn btn-primary btn-lg" >
+      Onward
+      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+    </button>
+  </form>
+</div>

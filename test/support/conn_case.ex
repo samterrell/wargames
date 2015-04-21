@@ -20,11 +20,6 @@ defmodule Wargames.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      # Alias the data repository and import query/model functions
-      alias Wargames.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
-
       # Import URL helpers from the router
       import Wargames.Router.Helpers
 
@@ -34,10 +29,6 @@ defmodule Wargames.ConnCase do
   end
 
   setup tags do
-    unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Wargames.Repo, [])
-    end
-
     :ok
   end
 end

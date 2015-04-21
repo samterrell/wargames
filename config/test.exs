@@ -9,11 +9,5 @@ config :wargames, Wargames.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-# Configure your database
-config :wargames, Wargames.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
-  database: "wargames_test",
-  size: 1,
-  max_overflow: false
+# Don't need to keep games around for long in test
+config :tictactoe, :timeout, 250
