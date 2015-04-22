@@ -1,9 +1,11 @@
 angular.module('app').controller('GameCtrl',
-['$scope', '$routeParams', '$location',
-function($scope, $routeParams, $location) {
+['$scope', '$routeParams', '$location', '$window',
+function($scope, $routeParams, $location, $window) {
   var Socket = require('phoenix').Socket;
   var game_id = $scope.game_id = $routeParams.game_id;
   if(!$scope.name) $location.url('/?game_id='+encodeURIComponent(game_id));
+
+  $scope.full_url = $window.location.href;
 
   var socket = new Socket("/ws");
   var channel;
