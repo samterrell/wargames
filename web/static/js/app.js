@@ -1,5 +1,5 @@
 (function(){
-  angular.module('app',['ngRoute', 'ngAnimate', 'ngCookies']).
+  angular.module('app',['ngRoute', 'ngAnimate', 'ngCookies', 'monospaced.qrcode']).
   config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
