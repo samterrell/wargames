@@ -10,4 +10,5 @@ config :wargames, Wargames.Endpoint,
 config :logger, level: :warn
 
 # Don't need to keep games around for long in test
-config :tictactoe, :timeout, 250
+config :wargames, TicTacToe.Server,
+  timeout: 250

@@ -1,22 +1,27 @@
 defmodule Wargames.TicTacToeChannel do
-  use Wargames.Web, :channel
+  use Phoenix.Channel
+  alias Phoenix.Socket
 
   def join("tictactoe:" <> game_id, auth_message, socket) do
     server = find_server(game_id)
     user = find_user(auth_message)
-    position = case TicTacToe.Server.join(server, user) do
-      {:ok, position} -> position
-      {:error, :game_full} -> :spectator
+    if user do
+      position = case TicTacToe.Server.join(server, user) do
+        {:ok, position} -> position
+        {:error, %{errors: [:game_full]}} -> :spectator
+      end
+      after_join fn socket ->
+        broadcast!(socket, "user:joined", %{position: position, user: user})
+        {:ok, state} = TicTacToe.Server.state(server)
+        push(socket, "state", jsonify(state))
+        socket
+      end
+      {:ok, socket
+            |> Socket.assign(:server, server)
+            |> Socket.assign(:user, user)}
+    else
+      {:error, %{errors: [:username_requried]}}
     end
-    after_join fn socket ->
-      broadcast!(socket, "user:joined", %{position: position, user: user})
-      {:ok, state} = TicTacToe.Server.state(server)
-      push(socket, "state", jsonify(state))
-      socket
-    end
-    {:ok, socket
-          |> Socket.assign(:server, server)
-          |> Socket.assign(:user, user)}
   end
 
   def handle_in("play", [x, y], socket) do

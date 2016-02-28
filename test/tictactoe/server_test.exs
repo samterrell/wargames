@@ -21,7 +21,7 @@ defmodule TicTacToe.ServerTest do
     assert {:ok, :x} == TicTacToe.Server.join(pid, "player1")
     assert {:ok, :x} == TicTacToe.Server.join(pid, "player1")
     assert {:ok, :o} == TicTacToe.Server.join(pid, "player2")
-    assert {:error, :game_full} == TicTacToe.Server.join(pid, "player3")
+    assert {:error, %{errors: [:game_full]}} == TicTacToe.Server.join(pid, "player3")
   end
 
   test "playing a game" do
@@ -32,13 +32,13 @@ defmodule TicTacToe.ServerTest do
     assert state[:board] == {{:x, nil, nil}, {nil, nil, nil}, {nil, nil, nil}}
     {:ok, state} = TicTacToe.Server.play(pid, {1, 1}, "player2")
     assert state[:board] == {{:x, nil, nil}, {nil, :o, nil}, {nil, nil, nil}}
-    {:error, errors} = TicTacToe.Server.play(pid, {1, 1}, "player1")
+    {:error, %{errors: errors}} = TicTacToe.Server.play(pid, {1, 1}, "player1")
     assert errors == [:position_taken]
-    {:error, errors} = TicTacToe.Server.play(pid, {-1, 1}, "player1")
+    {:error, %{errors: errors}} = TicTacToe.Server.play(pid, {-1, 1}, "player1")
     assert errors == [:invalid_position]
-    {:error, errors} = TicTacToe.Server.play(pid, {2, 2}, "player3")
+    {:error, %{errors: errors}} = TicTacToe.Server.play(pid, {2, 2}, "player3")
     assert errors == [:not_your_turn]
-    {:error, errors} = TicTacToe.Server.play(pid, {2, 2}, "player2")
+    {:error, %{errors: errors}} = TicTacToe.Server.play(pid, {2, 2}, "player2")
     assert errors == [:not_your_turn]
     {:ok, state} = TicTacToe.Server.play(pid, {2, 2}, "player1")
     assert state[:board] == {{:x, nil, nil}, {nil, :o, nil}, {nil, nil, :x}}
@@ -52,7 +52,7 @@ defmodule TicTacToe.ServerTest do
     {:ok, state} = TicTacToe.Server.play(pid, {2, 1}, "player1")
     assert state[:board] == {{:x, nil, :o}, {:o, :o, nil}, {:x, :x, :x}}
     assert state[:winner] == :x
-    {:error, errors} = TicTacToe.Server.play(pid, {1, 2}, "player2")
+    {:error, %{errors: errors}} = TicTacToe.Server.play(pid, {1, 2}, "player2")
     assert errors == [:game_over]
 
     {:ok, pid} = TicTacToe.Server.find_or_create(random_id)
@@ -69,7 +69,7 @@ defmodule TicTacToe.ServerTest do
     {:ok, state} = TicTacToe.Server.play(pid, {2, 0}, "player1")
     assert state[:board] == {{:x, :o, :x}, {:o, :o, :x}, {:x, :x, :o}}
     assert state[:winner] == :draw
-    {:error, errors} = TicTacToe.Server.play(pid, {0, 0}, "player3")
+    {:error, %{errors: errors}} = TicTacToe.Server.play(pid, {0, 0}, "player3")
     assert :game_over in errors
     assert :not_your_turn in errors
     assert :position_taken in errors
@@ -77,7 +77,7 @@ defmodule TicTacToe.ServerTest do
   end
 
   test "games time out unless pinged" do
-    timeout = Application.get_env(:tictactoe, :timeout)
+    timeout = Application.get_env(:wargames, TicTacToe.Server)[:timeout]
     id = random_id
     {:ok, pid} = TicTacToe.Server.find_or_create(id)
     TicTacToe.Server.join(pid, "player1")

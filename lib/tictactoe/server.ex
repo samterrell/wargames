@@ -1,9 +1,9 @@
 defmodule TicTacToe.Server do
   use GenServer
 
-  @timeout Application.get_env(:tictactoe, :timeout)
+  @timeout Application.get_env(:wargames, __MODULE__)[:timeout]
 
-  @derive [Access]
+  defdelegate [fetch(t, key), get_and_update(t, key, list)], to: Map
   defstruct turn: :x, winner: nil, x: nil, o: nil,
             board: {{nil, nil, nil},
                     {nil, nil, nil},
@@ -45,7 +45,7 @@ defmodule TicTacToe.Server do
         state = %{state | o: player}
         {:reply, {:ok, :o}, state, @timeout}
       else
-        {:reply, {:error, :game_full}, state, @timeout}
+        {:reply, {:error, %{errors: [:game_full]}}, state, @timeout}
       end
     end
   end
@@ -69,7 +69,7 @@ defmodule TicTacToe.Server do
       state = %{state | board: board, turn: turn, winner: winner(board)}
       {:reply, {:ok, state}, state, @timeout}
     else
-      {:reply, {:error, errors}, state, @timeout}
+      {:reply, {:error, %{errors: errors}}, state, @timeout}
     end
   end
 
@@ -78,7 +78,7 @@ defmodule TicTacToe.Server do
       state = %TicTacToe.Server{x: state.o, o: state.x}
       {:reply, {:ok, state}, state, @timeout}
     else
-      {:reply, {:error, [:game_in_progress]}, state, @timeout}
+      {:reply, {:error, %{errors: [:game_in_progress]}}, state, @timeout}
     end
   end
 

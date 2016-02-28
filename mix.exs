@@ -4,7 +4,7 @@ defmodule Wargames.Mixfile do
   def project do
     [app: :wargames,
      version: "0.0.1",
-     elixir: "~> 1.0",
+     elixir: "~> 1.2.3",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -17,7 +17,7 @@ defmodule Wargames.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {Wargames, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :phoenix_html, :cowboy, :logger]]
   end
 
   # Specifies which paths to compile per environment
@@ -28,8 +28,11 @@ defmodule Wargames.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.11"},
-     {:phoenix_live_reload, "~> 0.3"},
-     {:cowboy, "~> 1.0"}]
+    [
+      {:phoenix, "~> 1.1.4"},
+      {:phoenix_html, "~> 2.5.0"},
+      {:phoenix_live_reload, "~> 1.0.3", only: :dev},
+      {:cowboy, "~> 1.0.4"}
+    ]
   end
 end

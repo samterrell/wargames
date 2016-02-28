@@ -1,63 +1,40 @@
+/*jshint esnext:true */
+import {Socket, LongPoller} from "phoenix";
+
 angular.module('app').controller('GameCtrl',
 ['$scope', '$routeParams', '$location', '$window',
 function($scope, $routeParams, $location, $window) {
-  var Socket = require('phoenix').Socket;
   var game_id = $scope.game_id = $routeParams.game_id;
   if(!$scope.name) $location.url('/?game_id='+encodeURIComponent(game_id));
 
   $scope.full_url = $window.location.href;
 
-  var socket = new Socket("/ws");
+  var socket = new Socket("/ws", {});
+  socket.connect();
   var channel;
 
   socket.connect();
-
-  socket.onClose(function(e) {
-    console.log("CLOSE", e);
+  $scope.state = {};
+  channel = socket.channel("tictactoe:" + game_id, {name: $scope.name});
+  channel.on("state", function(state) {
+    $scope.state = state;
+    $scope.$digest();
   });
-  socket.join("tictactoe:" + game_id, {name: $scope.name})
-  .receive("ok", function(chan) {
-    channel = chan;
-    console.log("Connected...");
-    channel.onError(function(e) {
-      console.log("something went wrong", e);
-    });
-    channel.onClose(function(e) {
-      console.log("channel closed", e);
-    });
-    channel.on("state", function(state) {
-      $scope.state = state;
-      $scope.$digest();
-      console.log(state);
-    });
-    channel.on("user:joined", function(evt) {
-      if(evt.position == 'o') $scope.state.o = evt.user;
-      $scope.$digest();
-      console.log(evt);
-    });
+  channel.on("user:joined", function(evt) {
+    if(evt.position == 'o') $scope.state.o = evt.user;
+    $scope.$digest();
   });
+  channel.join();
 
   $scope.play = function(x, y) {
-    channel.push("play", [x,y]).receive("error", function(errors) {
-      console.log(errors);
-    });
+    channel.push("play", [x,y]);
   };
 
   $scope.ping = function() {
-    console.log(new Date().valueOf());
-    channel.push("ping", {})
-    .receive("ok", function(resp){
-      console.log(new Date().valueOf());
-      console.log(resp);
-    })
-    .receive("error", function(error) {
-      console.log(error);
-    });
+    channel.push("ping", {});
   };
 
   $scope.restart = function() {
-    channel.push("restart").receive("error", function(errors) {
-      console.log(errors);
-    });
+    channel.push("restart");
   };
 }]);

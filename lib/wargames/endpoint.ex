@@ -1,6 +1,8 @@
 defmodule Wargames.Endpoint do
   use Phoenix.Endpoint, otp_app: :wargames
 
+  socket "/ws", Wargames.UserSocket
+
   # Serve at "/" the given assets from "priv/static" directory
   plug Plug.Static,
     at: "/", from: :wargames,
@@ -9,6 +11,7 @@ defmodule Wargames.Endpoint do
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
+    socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
   end
@@ -29,5 +32,5 @@ defmodule Wargames.Endpoint do
     signing_salt: "RY8qgfUE",
     encryption_salt: "ydWHTbbC"
 
-  plug :router, Wargames.Router
+  plug Wargames.Router
 end

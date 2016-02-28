@@ -14,14 +14,14 @@ config :wargames, Wargames.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch"]]
 
 # Watch static and templates for browser reloading.
-# config :wargames, Wargames.Endpoint,
-#   live_reload: [
-#     patterns: [
-#       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
-#       ~r{web/views/.*(ex)$},
-#       ~r{web/templates/.*(eex)$}
-#     ]
-#   ]
+config :wargames, Wargames.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
+      ~r{web/views/.*(ex)$},
+      ~r{web/templates/.*(eex)$}
+    ]
+  ]
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"

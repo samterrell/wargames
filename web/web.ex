@@ -34,9 +34,6 @@ defmodule Wargames.Web do
     quote do
       use Phoenix.View, root: "web/templates"
 
-      # Import convenience functions from controllers
-      import Phoenix.Controller, only: [get_flash: 2]
-
       # Import URL helpers from the router
       import Wargames.Router.Helpers
 
