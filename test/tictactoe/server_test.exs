@@ -1,7 +1,7 @@
 defmodule TicTacToe.ServerTest do
   use ExUnit.Case, async: true
 
-  defp random_id, do: :crypto.rand_bytes(33) |> Base.url_encode64
+  defp random_id, do: :crypto.strong_rand_bytes(33) |> Base.url_encode64
 
   test "creating a server" do
     {:ok, pid} = TicTacToe.Server.find_or_create(random_id)
