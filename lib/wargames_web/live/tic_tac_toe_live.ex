@@ -1,5 +1,6 @@
 defmodule WargamesWeb.TicTacToeLive do
   use WargamesWeb, :live_view
+  alias Wargames.TicTacToe.Board
 
   @impl Phoenix.LiveView
   def mount(%{"id" => id}, session, socket) do

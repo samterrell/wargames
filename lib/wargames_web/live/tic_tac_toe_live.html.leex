@@ -30,19 +30,16 @@
       <%= for y <- 0..2 do %>
         <tr>
           <%= for x <- 0..2 do %>
-            <% value = elem(@board, x*3+y) %>
-            <%= if is_nil(value) and @my_turn do %>
-              <td class="clickable" phx-click="play" phx-value-x="<%= x %>" phx-value-y="<%= y %>">
-                &nbsp;
-              </td>
+            <%= if value = Board.get(@board, {x, y}) do %>
+              <td><%= value %></td>
             <% else %>
-              <td>
-                <%= if value do %>
-                  <%= value %>
-                <% else %>
+              <%= if @my_turn do %>
+                <td class="clickable" phx-click="play" phx-value-x="<%= x %>" phx-value-y="<%= y %>">
                   &nbsp;
-                <% end %>
-              </td>
+                </td>
+              <% else %>
+                <td>&nbsp;</td>
+              <% end %>
             <% end %>
           <% end %>
         </tr>
