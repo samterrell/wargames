@@ -16,6 +16,10 @@ defmodule Wargames.TicTacToe do
     Phoenix.PubSub.subscribe(Wargames.PubSub, "tictactoe:#{game_id}")
   end
 
+  def unsubscribe(game_id) do
+    Phoenix.PubSub.unsubscribe(Wargames.PubSub, "tictactoe:#{game_id}")
+  end
+
   def play(game_id, position, player), do: call(game_id, {:play, position, player})
   def ping(game_id), do: call(game_id, :ping)
   def state(game_id), do: call(game_id, :state)

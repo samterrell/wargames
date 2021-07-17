@@ -25,27 +25,25 @@
   </div>
 </div>
 <div>
-  <table class="tic-tac-toe-board" style="font-size: 5rem">
-    <tbody>
-      <%= for y <- 0..2 do %>
-        <tr>
-          <%= for x <- 0..2 do %>
-            <%= if value = Board.get(@board, {x, y}) do %>
-              <td><%= value %></td>
+  <div class="tic-tac-toe-board">
+    <%= for y <- 0..2 do %>
+      <div class="row">
+        <%= for x <- 0..2 do %>
+          <%= if value = Board.get(@board, {x, y}) do %>
+            <div class="cell"><%= value %></div>
+          <% else %>
+            <%= if @my_turn do %>
+              <div class="cell clickable" phx-click="play" phx-value-x="<%= x %>" phx-value-y="<%= y %>">
+                &nbsp;
+              </div>
             <% else %>
-              <%= if @my_turn do %>
-                <td class="clickable" phx-click="play" phx-value-x="<%= x %>" phx-value-y="<%= y %>">
-                  &nbsp;
-                </td>
-              <% else %>
-                <td>&nbsp;</td>
-              <% end %>
+              <div class="cell">&nbsp;</div>
             <% end %>
           <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
   <%= if is_nil(@winner) do %>
     <%= if @my_turn do %>
       <span class="pulse">Choose wisely!</span>
