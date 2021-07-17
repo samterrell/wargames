@@ -1,0 +1,46 @@
+<svg width="128" height="128" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect x="0" y="36" width="128" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="0" y="82" width="128" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="36" y="0" width="8" height="128" style="fill: rgb(24,200,0);" />
+  <rect x="82" y="0" width="8" height="128" style="fill: rgb(24,200,0);" />
+
+  <!-- T -->  
+  <rect x="4" y="4" width="28" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="14" y="4" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <!-- I -->  
+  <rect x="54" y="4" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="60" y="4" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <rect x="54" y="24" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <!-- C -->  
+  <rect x="100" y="4" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="4" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="24" width="20" height="8" style="fill: rgb(24,200,0);" />
+  
+  
+  <!-- T -->  
+  <rect x="4" y="48" width="28" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="14" y="48" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <!-- A -->  
+  <rect x="51" y="48" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="51" y="64" width="20" height="4" style="fill: rgb(24,200,0);" />
+  <rect x="51" y="48" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <rect x="68" y="48" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <!-- C -->  
+  <rect x="100" y="48" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="48" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="68" width="20" height="8" style="fill: rgb(24,200,0);" />
+  
+  <!-- T -->  
+  <rect x="4" y="94" width="28" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="14" y="94" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <!-- O -->  
+  <rect x="51" y="94" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="51" y="114" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="51" y="94" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <rect x="68" y="94" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <!-- C -->  
+  <rect x="100" y="94" width="20" height="8" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="94" width="8" height="28" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="106" width="16" height="4" style="fill: rgb(24,200,0);" />
+  <rect x="100" y="114" width="20" height="8" style="fill: rgb(24,200,0);" />
+</svg>

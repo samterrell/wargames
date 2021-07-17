@@ -1,0 +1,63 @@
+<div>
+  <%= if is_nil(@name) do %>
+  <form method="post" action="<%= Routes.session_path(@socket, :create) %>">
+    <input type="hidden" name="_csrf_token" value="<%= Phoenix.Controller.get_csrf_token() %>">
+    <input type="hidden" name="redirect_to" value="<%= Routes.tic_tac_toe_path(@socket, :game, @id) %>">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name">
+    <button>Set Name</button>
+  <form>
+  <% else %>
+    <div>Hello <%= @name %></div>
+  <% end %>
+  <%= if (is_nil(@x) or is_nil(@o)) and not is_nil(@name) and @name not in [@x, @o] do %>
+    <button type="button" phx-click="join">Join</button>
+  <% end %>
+
+  <div>Game ID: <span class="normal-text"><%= @id %></span></div>
+  <div>
+    x: <%= @x || "Open" %>
+    <%= if @winner == :x, do: "(winner)" %>
+  </div>
+  <div>
+    o: <%= @o || "Open" %>
+    <%= if @winner == :o, do: "(winner)" %>
+  </div>
+</div>
+<div>
+  <table class="tic-tac-toe-board" style="font-size: 5rem">
+    <tbody>
+      <%= for y <- 0..2 do %>
+        <tr>
+          <%= for x <- 0..2 do %>
+            <% value = elem(@board, x*3+y) %>
+            <%= if is_nil(value) and @my_turn do %>
+              <td class="clickable" phx-click="play" phx-value-x="<%= x %>" phx-value-y="<%= y %>">
+                &nbsp;
+              </td>
+            <% else %>
+              <td>
+                <%= if value do %>
+                  <%= value %>
+                <% else %>
+                  &nbsp;
+                <% end %>
+              </td>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= if is_nil(@winner) do %>
+    <%= if @my_turn do %>
+      <span class="pulse">Choose wisely!</span>
+    <% else %>
+      <span>Await opponent's move.</span>
+    <% end %>
+  <% else %>
+    <div class="right">
+      <button type="button" phx-click="restart" class="pulse-bg">Again?</button>
+    </div>
+  <% end %>
+</div>

@@ -1,14 +1,20 @@
 # Wargames
 
-Prerequisites:
+To start your Phoenix server:
 
-1. NodeJS (preferably 0.12.2)
-2. Elixir (Preferably 1.0.4)
+  * Install dependencies with `mix deps.get`
+  * Create and migrate your database with `mix ecto.setup`
+  * Install Node.js dependencies with `npm install` inside the `assets` directory
+  * Start Phoenix endpoint with `mix phx.server`
 
-To start the server:
+Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-1. Install dependencies with `mix deps.get`
-2. Install node deps `npm install`
-3. Start server with `mix phoenix.server`
+Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
 
-Now you can visit `http://localhost:4000` from your browser.
+## Learn more
+
+  * Official website: https://www.phoenixframework.org/
+  * Guides: https://hexdocs.pm/phoenix/overview.html
+  * Docs: https://hexdocs.pm/phoenix
+  * Forum: https://elixirforum.com/c/phoenix-forum
+  * Source: https://github.com/phoenixframework/phoenix
