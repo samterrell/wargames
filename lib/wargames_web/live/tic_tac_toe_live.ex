@@ -54,15 +54,19 @@ defmodule WargamesWeb.TicTacToeLive do
   end
 
   defp assign_state(socket, state) do
+    started = not is_nil(state.x) and not is_nil(state.o)
+
     assign(socket,
       board: state.board,
       turn: state.turn,
       x: state.x,
       o: state.o,
       winner: state.winner,
+      started: started,
       my_turn:
-        (state.turn == :x and socket.assigns.name == state.x) or
-          (state.turn == :o and socket.assigns.name == state.o)
+        started and
+          ((state.turn == :x and socket.assigns.name == state.x) or
+             (state.turn == :o and socket.assigns.name == state.o))
     )
   end
 end

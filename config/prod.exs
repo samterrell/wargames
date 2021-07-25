@@ -10,7 +10,8 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :wargames, WargamesWeb.Endpoint,
-  url: [host: "example.com", port: 80],
+  url: [host: "wargames.sam.terrell.cc", port: 443],
+  force_ssl: [hsts: true, rewrite_on: [:x_forwarded_proto, :x_forwarded_port, :x_forwarded_host]],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -52,4 +53,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

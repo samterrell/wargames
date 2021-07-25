@@ -1,0 +1,7 @@
+/.elixir_ls
+/_build
+/assets/node_modules
+/chart
+/deps
+/priv/static
+/test

@@ -44,15 +44,18 @@
       </div>
     <% end %>
   </div>
-  <%= if is_nil(@winner) do %>
-    <%= if @my_turn do %>
-      <span class="pulse">Choose wisely!</span>
-    <% else %>
-      <span>Await opponent's move.</span>
-    <% end %>
-  <% else %>
-    <div class="right">
-      <button type="button" phx-click="restart" class="pulse-bg">Again?</button>
-    </div>
+  <%= cond do %>
+    <% not @started -> %>
+      <span><%= gettext "Awaiting players to join." %></span>
+    <% @winner -> %>
+      <div class="right">
+        <button type="button" phx-click="restart" class="pulse-bg">
+          <%= gettext "Again?" %>
+        </button>
+      </div>
+    <% @my_turn -> %>
+      <span class="pulse"><%= gettext "Choose wisely!" %></span>
+    <% true -> %>
+      <span><%= gettext "Await opponent's move." %></span>
   <% end %>
 </div>

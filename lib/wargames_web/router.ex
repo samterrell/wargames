@@ -1,6 +1,22 @@
 defmodule WargamesWeb.Router do
   use WargamesWeb, :router
 
+  def preload(conn, _) do
+    preloads = [
+      {__MODULE__.Helpers.static_path(conn, "/css/app.css"), :style},
+      {__MODULE__.Helpers.static_path(conn, "/js/app.js"), :script},
+      {__MODULE__.Helpers.static_path(conn, "/fonts/MajorMonoDisplay-Regular.ttf"), :font},
+      {__MODULE__.Helpers.static_path(conn, "/images/logo.svg"), :image}
+    ]
+
+    link =
+      Enum.map(preloads, fn {path, type} -> "<#{path}>; rel=preload; as=#{type}" end)
+      |> Enum.join(", ")
+
+    Enum.reduce(preloads, conn, fn {path, _type}, conn -> push(conn, path) end)
+    |> put_resp_header("link", link)
+  end
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -8,6 +24,7 @@ defmodule WargamesWeb.Router do
     plug :put_root_layout, {WargamesWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :preload
   end
 
   pipeline :api do
